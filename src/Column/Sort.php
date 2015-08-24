@@ -7,19 +7,12 @@ use AjaxBlog\RapidGrid\Paginate;
 class Sort extends Base
 {
 
-    public $icons = [
-        'asc' => 'fa fa-sort-asc',
-        'desc' => 'fa fa-sort-desc'
-    ];
+    protected $templateHead = "column.sort";
 
-    public function contentHeaderCell() {
-        return parent::contentHeaderCell().$this->contentSortArrow();
-    }
-
-    protected function contentSortArrow() {
+    public function contentSortArrow($icons) {
 
         $content = [];
-        foreach($this->icons as $sort => $icon) {
+        foreach($icons as $sort => $icon) {
             $this->getUrl()->group($this->field, $sort);
             $this->getUrl()->clear(Paginate::NAME);
             $content[$sort] = "<a class='{$icon}' href='{$this->getUrl()->build()}'></a>";
@@ -27,10 +20,10 @@ class Sort extends Base
 
         $sort = $this->getUrl()->get($this->field);
         if ($sort) {
-            $content[$sort] = "<i class='{$this->icons[$sort]}'></i>";
+            $content[$sort] = "<i class='{$icons[$sort]}'></i>";
         }
 
-        return '<div class="th-sort pull-right">'.implode(" ", $content).'</div>';
+        return implode(" ", $content);
     }
 
     public function criteria($criteria) {

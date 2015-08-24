@@ -2,7 +2,7 @@
     <thead>
     <tr>
         @foreach($grid->getColumns() as $column)
-            <th>@include("column.header")</th>
+            <th>@include($column->getTemplateHead())</th>
         @endforeach
     </tr>
     </thead>
@@ -10,7 +10,7 @@
     @foreach($grid->rows() as $row)
         <tr>
             @foreach($grid->getColumns() as $column)
-                <td>@include($column->template, ["row" => $row])</td>
+                <td>@include($column->getTemplateCell(), ["row" => $row])</td>
             @endforeach
         </tr>
     @endforeach
@@ -19,7 +19,7 @@
 
 <div>
     <?php $paginate = $grid->getPaginate() ?>
-    @include($paginate->template)
+    @include($paginate->getTemplate())
 </div>
 
 <script>

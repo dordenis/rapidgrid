@@ -14,7 +14,7 @@ use AjaxBlog\RapidGrid\Column\ColumnAbstract;
 class DataGrid
 {
 
-    public $template = "grid";
+    protected $template = "grid";
 
     private $columns = [];
     private $prefix;
@@ -85,5 +85,9 @@ class DataGrid
             $column->criteria($this->criteria);
         }
         return $this->criteria;
+    }
+
+    public function getTemplate() {
+        return $this->template;
     }
 }

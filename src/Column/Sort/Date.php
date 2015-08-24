@@ -6,7 +6,7 @@ use AjaxBlog\RapidGrid\Column\Sort;
 
 class Date extends Sort {
 
-    public $template = "column.date";
+    public $templateCell = "column.date";
 
     public function getDate($row, $format="d.m.Y") {
         $date = $this->date($row);

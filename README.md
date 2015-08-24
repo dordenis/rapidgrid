@@ -15,7 +15,7 @@ The package can be installed via Composer by requiring the "ajaxblog/rapidgrid":
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
-define("TEMPLATE", __DIR__."/vendor/ajaxblog/rapidgrid/template");
+define("TEMPLATE", __DIR__."/vendor/ajaxblog/rapidgrid/template/default");
 define("TMP", __DIR__."/tmp");
 
 

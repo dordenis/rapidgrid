@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: cloudera
- * Date: 8/19/15
- * Time: 5:25 AM
- */
-
 namespace AjaxBlog\RapidGrid\Criteria;
 
 class Mock implements \AjaxBlog\RapidGrid\Criteria

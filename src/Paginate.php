@@ -5,7 +5,7 @@ namespace AjaxBlog\RapidGrid;
 
 class Paginate {
 
-    public $template = "paginate";
+    protected $template = "paginate";
 
 	private $total = 0;
 	private $limit = 20;
@@ -56,6 +56,10 @@ class Paginate {
 
 	public function setLimit($limit) {
 		$this->limit = $limit;
+	}
+
+	public function getTemplate() {
+		return $this->template;
 	}
 
 } 

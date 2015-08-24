@@ -8,7 +8,8 @@ use AjaxBlog\RapidGrid\Url;
 
 abstract class ColumnAbstract {
 
-    public $template = "column";
+    protected $templateHead = "header";
+	protected $templateCell = "column";
 
 	/**
 	 * @var Url
@@ -63,6 +64,14 @@ abstract class ColumnAbstract {
 
     public function getUrl() {
         return $this->url;
+    }
+
+    public function getTemplateHead() {
+        return $this->templateHead;
+    }
+
+    public function getTemplateCell() {
+        return $this->templateCell;
     }
 
 	abstract protected function contentHeaderCell();
