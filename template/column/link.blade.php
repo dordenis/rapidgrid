@@ -1,0 +1,1 @@
+<a href="{{ $column->getUrl($row) }}">{{ $column->renderBodyCell($row) }}</a>
