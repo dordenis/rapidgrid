@@ -49,7 +49,7 @@ echo $view->make($grid->template, ["grid" => $grid])->render();
 
 ```
 
-### Usage witch Laravel
+### Usage with Laravel
 
 ```php
 
