@@ -66,7 +66,7 @@ $grid->setColumns([
 ]);
 
 
-$render = (new Philo\Blade\Blade(TEMPLATE, TMP))->view();
-echo $render->make($grid->template, ["grid" => $grid])->render();
+$view = (new Philo\Blade\Blade(TEMPLATE, TMP))->view();
+echo $view->make($grid->template, ["grid" => $grid])->render();
 
 ```
