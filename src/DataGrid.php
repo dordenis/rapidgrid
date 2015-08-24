@@ -81,10 +81,9 @@ class DataGrid
     }
 
     private function criteria() {
-        $criteria = $this->criteria;
         foreach($this->getColumns() as $column) {
-            $criteria = $column->criteria($criteria);
+            $column->criteria($this->criteria);
         }
-        return $criteria;
+        return $this->criteria;
     }
 }

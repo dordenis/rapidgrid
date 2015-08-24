@@ -48,3 +48,22 @@ $view = (new Philo\Blade\Blade(TEMPLATE, TMP))->view();
 echo $view->make($grid->template, ["grid" => $grid])->render();
 
 ```
+
+### Usage witch Laravel
+
+
+use \AjaxBlog\RapidGrid;
+
+$model = DB::table('table_name');
+
+$grid = new RapidGrid\DataGrid(new RapidGrid\Criteria\Laravel($model));
+$grid->setColumns([
+    RapidGrid\Column\Base::factory("CountryName", "field1")->setFilter(RapidGrid\Filter\Search::factory()),
+    RapidGrid\Column\Sort::factory("CityFromName", "field2"),
+    RapidGrid\Column\Sort\Price::factory("Price", "price"),
+    RapidGrid\Column\Sort\Date::factory("CheckInDate", "date"),
+]);
+
+
+$render = (new Philo\Blade\Blade(TEMPLATE, TMP))->view();
+echo $render->make($grid->template, ["grid" => $grid])->render();
