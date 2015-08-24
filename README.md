@@ -51,6 +51,7 @@ echo $view->make($grid->template, ["grid" => $grid])->render();
 
 ### Usage witch Laravel
 
+```php
 
 use \AjaxBlog\RapidGrid;
 
@@ -67,3 +68,5 @@ $grid->setColumns([
 
 $render = (new Philo\Blade\Blade(TEMPLATE, TMP))->view();
 echo $render->make($grid->template, ["grid" => $grid])->render();
+
+```
