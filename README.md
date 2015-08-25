@@ -45,7 +45,7 @@ $grid->setColumns([
 
 
 $view = (new Philo\Blade\Blade(TEMPLATE, TMP))->view();
-echo $view->make($grid->template, ["grid" => $grid])->render();
+echo $view->make($grid->getTemplate(), ["grid" => $grid])->render();
 
 ```
 
