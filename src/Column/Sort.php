@@ -10,6 +10,7 @@ class Sort extends Base
     protected $templateHead = "column.sort";
 
     public function contentSortArrow($icons) {
+        $current = $this->getUrl()->get($this->field);
 
         $content = [];
         foreach($icons as $sort => $icon) {
@@ -18,9 +19,8 @@ class Sort extends Base
             $content[$sort] = "<a class='{$icon}' href='{$this->getUrl()->build()}'></a>";
         }
 
-        $sort = $this->getUrl()->get($this->field);
-        if ($sort) {
-            $content[$sort] = "<i class='{$icons[$sort]}'></i>";
+        if ($current) {
+            $content[$current] = "<i class='{$icons[$current]}'></i>";
         }
 
         return implode(" ", $content);
