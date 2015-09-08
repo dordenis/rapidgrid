@@ -4,19 +4,18 @@ namespace AjaxBlog\RapidGrid\Column;
 
 use AjaxBlog\RapidGrid\Paginate;
 
-class Sort extends Base
+class Sort extends Sample
 {
 
-    protected $templateHead = "column.sort";
+    protected $template = "sort";
 
     public function contentSortArrow($icons) {
         $current = $this->getUrl()->get($this->field);
 
         $content = [];
         foreach($icons as $sort => $icon) {
-            $this->getUrl()->group($this->field, $sort);
-            $this->getUrl()->clear(Paginate::NAME);
-            $content[$sort] = "<a class='{$icon}' href='{$this->getUrl()->build()}'></a>";
+            $url = $this->getUrl()->group($this->field, $sort)->clear(Paginate::NAME);
+            $content[$sort] = "<a class='{$icon}' href='{$url->build()}'></a>";
         }
 
         if ($current) {

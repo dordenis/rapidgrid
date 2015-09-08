@@ -6,7 +6,7 @@ use AjaxBlog\RapidGrid\Column\Sort;
 
 abstract class Link extends Sort {
 
-	public $templateCell = "column.link";
+	public $templateCell = "link";
 
 	abstract public function getUrl($row);
 

@@ -37,6 +37,10 @@ class Paginate {
 		return $this->current;
 	}
 
+	public function setUrl($url) {
+		$this->url = $url;
+	}
+
 	public function getUrl($page) {
 		$this->url->group(self::NAME, $page);
 		return $this->url->build();

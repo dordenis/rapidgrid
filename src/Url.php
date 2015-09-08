@@ -30,6 +30,7 @@ class Url {
 	public function group($group, $value) {
         $key = $this->getKey($group);
 		$this->params[$key] = $value;
+		return $this;
 	}
 
 	public function clear($group=null) {
@@ -41,6 +42,7 @@ class Url {
 				unset($this->params[$key]);
 			}
 		}
+		return $this;
 	}
 
 	public function get($name, $default=null) {
@@ -59,7 +61,7 @@ class Url {
 	}
 
     private function getKey($group) {
-        return $this->prefix ? "{$this->prefix}.{$group}" : $group;
+        return $this->prefix ? "{$this->prefix}-{$group}" : $group;
     }
 
 } 

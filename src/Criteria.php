@@ -22,4 +22,5 @@ interface Criteria
     public function offset($offset);
     public function limit($limit);
     public function match($field, $value);
+    public function equal($field, $value);
 }

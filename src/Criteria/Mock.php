@@ -34,4 +34,9 @@ class Mock implements \AjaxBlog\RapidGrid\Criteria
     public function match($field, $value) {
 
     }
+
+    public function equal($field, $value)
+    {
+
+    }
 }

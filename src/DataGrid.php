@@ -17,7 +17,6 @@ class DataGrid
     protected $template = "grid";
 
     private $columns = [];
-    private $prefix;
 
     /**
      * @var Criteria
@@ -29,10 +28,9 @@ class DataGrid
      */
     private $paginate;
 
-    public function __construct($criteria, $prefix=null) {
+    public function __construct($criteria) {
         $this->criteria = $criteria;
-        $this->prefix = $prefix;
-        $this->setPaginate(new Paginate($prefix));
+        $this->setPaginate(new Paginate());
     }
 
 
@@ -41,7 +39,6 @@ class DataGrid
      * @return $this
      */
     public function setColumn($column) {
-        $column->setUrl(new Url($this->prefix));
         $this->columns[] = $column;
         return $this;
     }
@@ -89,5 +86,14 @@ class DataGrid
 
     public function getTemplate() {
         return $this->template;
+    }
+
+    public function setUrl($url) {
+        $this->paginate->setUrl(clone $url);
+
+        foreach($this->getColumns() as $column) {
+            $column->setUrl(clone $url);
+            $column->getFilter()->setUrl(clone $url);
+        }
     }
 }

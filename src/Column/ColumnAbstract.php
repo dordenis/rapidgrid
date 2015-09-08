@@ -8,8 +8,7 @@ use AjaxBlog\RapidGrid\Url;
 
 abstract class ColumnAbstract {
 
-    protected $templateHead = "header";
-	protected $templateCell = "column";
+    protected $template = "column";
 
 	/**
 	 * @var Url
@@ -27,6 +26,7 @@ abstract class ColumnAbstract {
 	final public function __construct($field=null, $label=null) {
 		$this->field = $field;
 		$this->label = $label;
+		$this->url = new Url();
 	}
 
 	final public function renderHeaderCell() {
@@ -42,9 +42,6 @@ abstract class ColumnAbstract {
 	 * @return $this
 	 */
 	public function setFilter($filter) {
-        if($this->url) {
-            $filter->setUrl($this->getUrl());
-        }
         $filter->setField($this->field);
 		$this->filter = $filter;
 		return $this;
@@ -54,24 +51,16 @@ abstract class ColumnAbstract {
         return $this->filter;
     }
 
-    public function setUrl($url) {
-        if($this->getFilter()) {
-            $this->getFilter()->setUrl($url);
-        }
-        $this->url = $url;
-        return $this;
-    }
-
     public function getUrl() {
-        return $this->url;
+        return clone $this->url;
     }
 
-    public function getTemplateHead() {
-        return $this->templateHead;
-    }
+	public function setUrl($url) {
+		$this->url = $url;
+	}
 
-    public function getTemplateCell() {
-        return $this->templateCell;
+    public function getTemplate() {
+        return $this->template;
     }
 
 	abstract protected function contentHeaderCell();

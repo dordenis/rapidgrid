@@ -2,7 +2,7 @@
     <thead>
     <tr>
         @foreach($grid->getColumns() as $column)
-            <th>@include($column->getTemplateHead())</th>
+            <th>@include("head.".$column->getTemplate())</th>
         @endforeach
     </tr>
     </thead>
@@ -10,7 +10,7 @@
     @foreach($grid->rows() as $row)
         <tr>
             @foreach($grid->getColumns() as $column)
-                <td>@include($column->getTemplateCell(), ["row" => $row])</td>
+                <td>@include("cell.".$column->getTemplate(), ["row" => $row])</td>
             @endforeach
         </tr>
     @endforeach
