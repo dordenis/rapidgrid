@@ -1,0 +1,1 @@
+{{ $column->getDate($row) }} <small class='text-muted'>{{ $column->getTime($row) }}</small>

@@ -1,0 +1,2 @@
+{!! $column->renderBodyCell($row) !!}
+
