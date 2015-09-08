@@ -48,4 +48,9 @@ class Laravel implements Criteria
     {
         $this->model->where($field, "like", "%{$value}%");
     }
+
+    public function equal($field, $value)
+    {
+        $this->model->where($field, "=", $value);
+    }
 }
