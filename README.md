@@ -1,10 +1,13 @@
-### Installation 
+![Alt text](/img/rapidgrid.png "RapidGrid")
+
+
+### Installation
 The package can be installed via Composer by requiring the "ajaxblog/rapidgrid": "*" package in your project's composer.json.
 
 ```json
 {
    "require": {
-        "philo/laravel-blade": "2.*",
+        "philo/laravel-blade": "3.*",
         "ajaxblog/rapidgrid": "*"
     }
 }
@@ -37,15 +40,18 @@ for($i=0; $i<5; $i++) {
 
 $grid = new RapidGrid\DataGrid(new RapidGrid\Criteria\Mock($data));
 $grid->setColumns([
-    RapidGrid\Column\Base::factory("field1", "field1")->setFilter(RapidGrid\Filter\Search::factory()),
-    RapidGrid\Column\Sort::factory("field2", "field2"),
-    RapidGrid\Column\Sort\Price::factory("price", "price"),
+    RapidGrid\Column\Sample::factory("field1", "field1")->setFilter(RapidGrid\Filter\Search::factory()),
+    RapidGrid\Column\Sort::factory("field2", "field2")->setFilter(RapidGrid\Filter\ListBox\Check::factory([0 => 'yes', 1 => 'no'])),
+    RapidGrid\Column\Sort\Price::factory("price", "price")->setFilter(RapidGrid\Filter\ListBox\Radio::factory([0 => 'yes', 1 => 'no'])),
     RapidGrid\Column\Sort\Date::factory("date", "date"),
 ]);
 
 
-$view = (new Philo\Blade\Blade(TEMPLATE, TMP))->view();
-echo $view->make($grid->getTemplate(), ["grid" => $grid])->render();
+$blade = new Philo\Blade\Blade(TEMPLATE, TMP);
+
+$grid = $blade->view()->make($grid->getTemplate(), ["grid" => $grid])->render();
+echo $blade->view()->make('main', ["grid" => $grid])->render();
+
 
 ```
 
@@ -59,14 +65,10 @@ $model = DB::table('table_name');
 
 $grid = new RapidGrid\DataGrid(new RapidGrid\Criteria\Laravel($model));
 $grid->setColumns([
-    RapidGrid\Column\Base::factory("CountryName", "field1")->setFilter(RapidGrid\Filter\Search::factory()),
-    RapidGrid\Column\Sort::factory("CityFromName", "field2"),
-    RapidGrid\Column\Sort\Price::factory("Price", "price"),
-    RapidGrid\Column\Sort\Date::factory("CheckInDate", "date"),
+    RapidGrid\Column\Sample::factory("field1", "field1")->setFilter(RapidGrid\Filter\Search::factory()),
+    RapidGrid\Column\Sort::factory("field2", "field2")->setFilter(RapidGrid\Filter\ListBox\Check::factory([0 => 'yes', 1 => 'no'])),
+    RapidGrid\Column\Sort\Price::factory("price", "price")->setFilter(RapidGrid\Filter\ListBox\Radio::factory([0 => 'yes', 1 => 'no'])),
+    RapidGrid\Column\Sort\Date::factory("date", "date"),
 ]);
-
-
-$view = (new Philo\Blade\Blade(TEMPLATE, TMP))->view();
-echo $view->make($grid->getTemplate(), ["grid" => $grid])->render();
 
 ```

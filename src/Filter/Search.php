@@ -7,7 +7,7 @@ class Search extends FilterAbstract {
 	public $template = 'search';
 
 	/**
-	 * @param $criteria \CDbCriteria
+	 * @param $criteria \AjaxBlog\RapidGrid\Criteria
 	 * @return mixed
 	 */
 	public function criteria($criteria) {

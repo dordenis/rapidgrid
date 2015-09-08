@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: cloudera
- * Date: 8/19/15
- * Time: 2:18 AM
- */
 
 namespace AjaxBlog\RapidGrid;
 
