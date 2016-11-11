@@ -17,58 +17,71 @@ The package can be installed via Composer by requiring the "ajaxblog/rapidgrid":
 ```php
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
-define("TEMPLATE", __DIR__."/vendor/ajaxblog/rapidgrid/template/default");
-define("TMP", __DIR__."/tmp");
 
 
-use \AjaxBlog\RapidGrid;
+include_once  "vendor/autoload.php";
 
-$row = [
-    "field1" => rand(1, 100),
-    "field2" => rand(1, 100),
+use \AjaxBlog\RapidGrid\DataGrid;
+use \AjaxBlog\RapidGrid\Column;
+use \AjaxBlog\RapidGrid\Header;
+
+$row = [[
+    "field1" => 10,
+    "field2" => 11,
     "link" => rand(1, 100),
     "date" => "2015-10-15 10:14:56",
     "price" => rand(1000, 10000),
     "link" => "link/".rand(1000, 10000),
-];
+]];
 
-$data = [];
-for($i=0; $i<5; $i++) {
-    $data[] = $row;
-}
 
-$grid = new RapidGrid\DataGrid(new RapidGrid\Criteria\Mock($data));
+use Illuminate\Database\Capsule\Manager as Capsule;
+
+$capsule = new Capsule;
+
+$capsule->addConnection([
+    'driver'    => 'mysql',
+    'host'      => 'localhost',
+    'database'  => '...',
+    'username'  => '...',
+    'password'  => '...',
+    'charset'   => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix'    => '',
+]);
+
+// Set the event dispatcher used by Eloquent models... (optional)
+use Illuminate\Events\Dispatcher;
+use Illuminate\Container\Container;
+$capsule->setEventDispatcher(new Dispatcher(new Container));
+
+// Make this Capsule instance available globally via static methods... (optional)
+$capsule->setAsGlobal();
+
+// Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
+$capsule->bootEloquent();
+
+$model = Capsule::table('model');
+
+$views = __DIR__ . '/views';
+$cache = __DIR__ . '/cache';
+$blade = new \Philo\Blade\Blade($views, $cache);
+
+$model = new \AjaxBlog\RapidGrid\Criteria\Laravel($model);
+$grid = new DataGrid(table_name);
+$grid->setLimit(20);
+
+$column1 = Column\Sort::factory("id", "Id")->setHeaders([new Header\Check("id", [1=>1, 2=>2])]);
+$column2 = Column\Sort::factory("name", "Name")->setHeaders([new Header\Search("name")]);
+
 $grid->setColumns([
-    RapidGrid\Column\Sample::factory("field1", "field1")->setFilter(RapidGrid\Filter\Search::factory()),
-    RapidGrid\Column\Sort::factory("field2", "field2")->setFilter(RapidGrid\Filter\ListBox\Check::factory([0 => 'yes', 1 => 'no'])),
-    RapidGrid\Column\Sort\Price::factory("price", "price")->setFilter(RapidGrid\Filter\ListBox\Radio::factory([0 => 'yes', 1 => 'no'])),
-    RapidGrid\Column\Sort\Date::factory("date", "date"),
+    $column1,
+    $column2,
 ]);
 
 
-$blade = new Philo\Blade\Blade(TEMPLATE, TMP);
+$table = $blade->view()->make("grid", ["grid" => $grid])->render();
+echo $blade->view()->make("page", ["table" => $table]);
 
-$grid = $blade->view()->make($grid->getTemplate(), ["grid" => $grid])->render();
-echo $blade->view()->make('main', ["grid" => $grid])->render();
-
-
-```
-
-### Usage with Laravel
-
-```php
-
-use \AjaxBlog\RapidGrid;
-
-$model = DB::table('table_name');
-
-$grid = new RapidGrid\DataGrid(new RapidGrid\Criteria\Laravel($model));
-$grid->setColumns([
-    RapidGrid\Column\Sample::factory("field1", "field1")->setFilter(RapidGrid\Filter\Search::factory()),
-    RapidGrid\Column\Sort::factory("field2", "field2")->setFilter(RapidGrid\Filter\ListBox\Check::factory([0 => 'yes', 1 => 'no'])),
-    RapidGrid\Column\Sort\Price::factory("price", "price")->setFilter(RapidGrid\Filter\ListBox\Radio::factory([0 => 'yes', 1 => 'no'])),
-    RapidGrid\Column\Sort\Date::factory("date", "date"),
-]);
 
 ```

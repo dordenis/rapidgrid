@@ -3,7 +3,6 @@
 
 include_once  "vendor/autoload.php";
 
-use \AjaxBlog\RapidGrid\Criteria\Mock;
 use \AjaxBlog\RapidGrid\DataGrid;
 use \AjaxBlog\RapidGrid\Column;
 use \AjaxBlog\RapidGrid\Header;
@@ -25,9 +24,9 @@ $capsule = new Capsule;
 $capsule->addConnection([
     'driver'    => 'mysql',
     'host'      => 'localhost',
-    'database'  => 'db_hotels',
-    'username'  => 'user',
-    'password'  => '1',
+    'database'  => '...',
+    'username'  => '...',
+    'password'  => '...',
     'charset'   => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix'    => '',
@@ -44,7 +43,7 @@ $capsule->setAsGlobal();
 // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
 $capsule->bootEloquent();
 
-$model = Capsule::table('bookmarks');
+$model = Capsule::table(table_name);
 
 $views = __DIR__ . '/views';
 $cache = __DIR__ . '/cache';
