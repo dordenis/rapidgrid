@@ -1,0 +1,2 @@
+{!! $column->getValue($row) !!}
+

@@ -1,0 +1,23 @@
+{
+    "name": "ajaxblog/rapidgrid",
+    "keywords": ["grid"],
+    "authors": [
+        {
+            "name": "Denis Doroshenko",
+            "email": "dordenis@gmail.com"
+        }
+    ],
+    "require": {
+        "philo/laravel-blade": "3.*",
+        "illuminate/events": "^5.3",
+        "illuminate/database": "^5.3"
+    },
+    "require-dev": {
+	    "phpunit/phpunit": "4.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "AjaxBlog\\RapidGrid\\": "src"
+        }
+    }
+}
