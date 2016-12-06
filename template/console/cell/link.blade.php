@@ -1,0 +1,1 @@
+link: {{$column->renderBodyCell($row)}}
