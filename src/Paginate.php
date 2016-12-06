@@ -63,4 +63,4 @@ class Paginate {
 		$this->limit = $limit;
 	}
 
-}
+} 
