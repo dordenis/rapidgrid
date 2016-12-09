@@ -31,31 +31,37 @@ class Laravel implements Criteria
 
     public function order($field, $sort)
     {
-        $this->model->orderBy($field, $sort);
+        $this->model = $this->model->orderBy($field, $sort);
+        $query = $this->model->getQuery();
+        $query->orders = [[
+            "column" => $field,
+            "direction" => $sort
+        ]];
+        $this->model->getQuery($query);
     }
 
     public function offset($offset)
     {
-        $this->model->skip($offset);
+        $this->model = $this->model->skip($offset);
     }
 
     public function limit($limit)
     {
-        $this->model->take($limit);
+        $this->model = $this->model->take($limit);
     }
 
     public function match($field, $value)
     {
-        $this->model->where($field, "like", "%{$value}%");
+        $this->model = $this->model->where($field, "like", "%{$value}%");
     }
 
     public function equal($field, $value)
     {
-        $this->model->where($field, "=", $value);
+        $this->model = $this->model->where($field, "=", $value);
     }
 
     public function in($field, $values=[]) {
-        $this->model->whereIn($field, $values);
+        $this->model = $this->model->whereIn($field, $values);
     }
 
     public function sql() {

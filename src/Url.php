@@ -25,7 +25,7 @@ class Url {
 
 	public function __construct($prefix=null) {
         $this->prefix = $prefix;
-		$this->params = array_merge($_GET, $_POST);
+		$this->params = $_GET;
 
         $request = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : "";
 		$this->url = isset($_SERVER['HTTP_HOST']) ? "//".$_SERVER['HTTP_HOST'].preg_replace('/\?.*/', '', $request) : "";

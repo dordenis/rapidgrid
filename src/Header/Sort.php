@@ -27,7 +27,7 @@ class Sort extends Header
 
     public function getUrl($sort) {
         $url = new Url();
-        return ($this->getValue() == $sort) ?  null : $url->set($this->getKey(), $sort)->clear(Paginate::NAME)->build();
+        return ($this->getValue() == $sort) ?  null : $url->set(self::NAME, "{$this->field}|{$sort}")->clear(Paginate::NAME)->build();
     }
 
     public function criteria(&$criteria) {
@@ -38,11 +38,12 @@ class Sort extends Header
     }
 
     private function getValue() {
-        return Url::getInstance()->get($this->getKey());
-    }
-
-    private function getKey() {
-        return self::NAME."_".$this->field;
+        $value = Url::getInstance()->get(self::NAME);
+        $value = explode("|", $value);
+        if (is_array($value) and ($value[0] == $this->field)) {
+            return  $value[1];
+        }
+        return null;
     }
 
 
